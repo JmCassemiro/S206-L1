@@ -14,8 +14,8 @@ Este repositório contém uma coleção de exercícios práticos sobre qualidade
 ## Estrutura do Repositório
 
 - `exercicios/` - Contém pastas e arquivos para diferentes exercícios sobre testes automatizados.
-  - `cypress/` - Exemplos de testes automatizados utilizando o Cypress.
-  - `postman/` - Coleções de testes de API usando o Postman.
+- `cypress/` - Exemplos de testes automatizados utilizando o Cypress.
+-  - `postman/` - Coleções de testes de API usando o Postman.
 - `documentacao/` - Documentação adicional sobre os exercícios, práticas recomendadas e ferramentas utilizadas.
 
 ## Ferramentas e Tecnologias
