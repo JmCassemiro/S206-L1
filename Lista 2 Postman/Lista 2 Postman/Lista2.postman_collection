@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "79fe3585-9c3e-41c6-8c3c-3a6dbc16cb3d",
+		"name": "Lista 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37508867"
+	},
+	"item": [
+		{
+			"name": "Lista 2 Postman",
+			"item": [
+				{
+					"name": "Teste Negativos",
+					"item": [
+						{
+							"name": "2. Teste negativo - Requisição com método inválido (POST /user)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Error message or empty response\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.be.an(\"object\");",
+											"});",
+											"",
+											"pm.test(\"Status code is 405\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. Teste negativo - Enviar ID inválido para usuário (GET /users/invalid)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Response is empty or error message\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.be.an(\"object\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/users/invalid",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users",
+										"invalid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6. Teste negativo - Endpoint inexistente (GET /invalid-endpoint)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"pm.test(\"Empty or error response\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.be.an(\"object\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/invalid-endpoint",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"invalid-endpoint"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Testes Positivos",
+					"item": [
+						{
+							"name": "1. Teste positivo - Obter detalhes de um usuário (GET /user)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response contains username and email\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property(\"username\");",
+											"    pm.expect(jsonData).to.have.property(\"email\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/users/1",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Teste positivo - Listar múltiplos usuários (GET /users)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response contains data and total\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property(\"length\");",
+											"    pm.expect(jsonData).to.be.an(\"array\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5. Teste positivo - Verificar usuários paginados (GET /users?page=1&limit=10)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Data array length is 10\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.length).to.equal(10);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/users?page=1&limit=10",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
